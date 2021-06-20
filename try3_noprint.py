@@ -114,16 +114,10 @@ def main():
         c, d = find_colors_cd(g, X, fan_x)
         cd_path_len = find_and_invert_cd_path(g, X, c, d)
         w_idx, w = find_w_in_fan(g, d, fan_x) if cd_path_len else (len(fan_x) - 1, fan_x[-1])
-        if not(w_idx >= 0):
-            print(g.edges)
-            exit(40)
         fan_x_view = SequenceView(fan_x)
         rotate_fan(g, X, fan_x_view[: w_idx + 1])
         set_edge_color(g, X, w, d)
-        edges -= {(X, w), (w, X)}
-    print('Done!')
-    #draw_g(g)
-    #plt.show()
+        edges -= {(X, f), (f, X)}
 
 
 if __name__ == '__main__':

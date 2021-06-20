@@ -14,6 +14,8 @@ ColorType = int
 EdgeType = Tuple[NodeType, NodeType]
 FanType = Sequence[NodeType]
 FanViewType = SequenceView[NodeType]
+# other types to consider:
+## MaximalFanType, FreeColorType, UnFreeColorType
 
 SENTINEL_COLOR = -1  # this should be inside ColorType, if we want to use types correctly.
 
@@ -39,9 +41,9 @@ def next_color(c: ColorType = ColorType()) -> ColorType:
 
 def find_maximal_fan(g: nx.Graph, x: NodeType, f: NodeType) -> FanType:
     fan_x = [f]
-    fan_is_maximal = True
-    while fan_is_maximal:
-        fan_is_maximal = False
+    fan_is_maximal = False
+    while not fan_is_maximal:
+        fan_is_maximal = True
         for _, v in g.edges(x):
             if (
                 edge_is_colored(g, x, v)
@@ -105,10 +107,8 @@ def main() -> int:
     g = nx.Graph()
     g.add_nodes_from(range(n))
     
-    for line in fileinput.input():
-        if not m:
-            break
-        u, v = map(int, line.split())
+    while m:
+        u, v = map(int, input().split())
         g.add_edge(u, v)
         m -= 1
     
@@ -116,6 +116,8 @@ def main() -> int:
     
     edges = set(g.edges)
     while edges:
+        #print(dict(g.edges))
+        #print(edges)
         X, f = next(iter(edges))
         fan_x = find_maximal_fan(g, X, f)
         c, d = find_colors_cd(g, X, fan_x)

@@ -100,7 +100,7 @@ def rotate_fan(g: nx.Graph, x: NodeType, fan_prime_x: FanViewType) -> None:
     #)  # Redundant since we set the edge's color after this function anyway.
 
 
-def main():
+def main() -> int:
     n, m = map(int, input().split())
     g = nx.Graph()
     g.add_nodes_from(range(n))
@@ -124,14 +124,16 @@ def main():
         fan_x_view = SequenceView(fan_x)
         rotate_fan(g, X, fan_x_view[: w_idx + 1])
         set_edge_color(g, X, w, d)
-        edges -= {(X, f), (f, X)}
+        edges -= {(X, f)}
         last_color = max(last_color, d)
     
     Δ = max(map(lambda ud: ud[1], g.degree))
     print(Δ, last_color)
     for u, v in g.edges:
         print(u, v, get_edge_color(g, u, v))
+        
+    return last_color <= Δ + 1
 
 
 if __name__ == '__main__':
-    main()
+    exit(not(main()))

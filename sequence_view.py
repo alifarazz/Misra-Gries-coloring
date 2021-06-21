@@ -46,4 +46,4 @@ class SequenceView(Sequence):
         return len(self._target)
 
     def __repr__(self):
-        return '{}({})'.format(self.__class__.__name__, repr(self._target))
+        return "{}({})".format(self.__class__.__name__, repr(self._target))

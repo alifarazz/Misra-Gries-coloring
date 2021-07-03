@@ -9,7 +9,7 @@ IndexType = int
 LengthType = int
 EdgeType = Tuple[NodeType, NodeType]
 FanType = Sequence[NodeType]
-FanViewType = SequenceView[NodeType]
+FanViewType = SequenceView
 ## Stuff to add in future: MaximalFanType, FreeColorType, IncidentColorType
 
 

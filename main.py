@@ -33,14 +33,14 @@ def find_colors_cd(
         c += 1
     while not g.color_is_free_at_vertex(d, l):
         d += 1
-    return (c, d)
+    return c, d
 
 
 def find_and_invert_cd_path(
     g: Graph, u: NodeType, c: ColorType, d: ColorType
 ) -> LengthType:
-    '''`u` is the `X` of the maximal fan.
-    returns length of cd-path'''
+    """`u` is the `X` of the maximal fan.
+    returns length of cd-path"""
 
     path_is_maximal = False
     seen = {u}  # TODO: can be optimized, a cd-trail may also be ok.
@@ -53,7 +53,8 @@ def find_and_invert_cd_path(
                 u = v  # set vertex for next iter
                 c, d = d, c  # swap colors
                 path_is_maximal = False  # to loop over the new vertex
-                seen |= {v}  # TODO
+                seen.add(v)  # TODO
+                # seen |= {v}  # TODO
                 break  # next iter
     return len(seen) - 1
 
@@ -61,16 +62,14 @@ def find_and_invert_cd_path(
 def find_w_in_fan(g: Graph, d: ColorType, fan_x: FanType) -> Tuple[IndexType, NodeType]:
     for i, u in enumerate(fan_x):
         if g.color_is_free_at_vertex(d, u):
-            return (i, u)
-    return (-1, None)  # this line should be unreachable
+            return i, u
+    return -1, None  # this line should be unreachable
 
 
 def rotate_fan(g: Graph, x: NodeType, fan_prime_x: FanViewType):
     for u, uplus in zip(fan_prime_x, fan_prime_x[1:]):
         c = g.get_edge_color(x, uplus)
         g.set_edge_color(x, u, c)
-
-
 #    g.rm_edge_color(
 #        x, fan_prime_x[-1]
 #    )  # Redundant since we set the edge's color after this function anyway.
@@ -106,8 +105,13 @@ def main() -> int:
     for u, v in edges:
         print(u, v, g.get_edge_color(u, v))
 
-    return max_color <= Δ + 1
+    coloring_is_optimal = max_color <= Δ + 1
+    return int(not coloring_is_optimal)  # return 0 everything went smoothly
 
 
-if __name__ == '__main__':
-    exit(not (main()))
+if __name__ == "__main__":
+    status = main()
+    assert (
+        status == 0
+    ), "The proposed edge coloring is probably wrong as the output don't match Vizing's theorem."
+    exit(status)

@@ -113,5 +113,5 @@ if __name__ == "__main__":
     status = main()
     assert (
         status == 0
-    ), "The proposed edge coloring is probably wrong as the output don't match Vizing's theorem."
+    ), "The proposed edge coloring is probably wrong as the output doesn't match Vizing's theorem."
     exit(status)

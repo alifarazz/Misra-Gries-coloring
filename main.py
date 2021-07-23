@@ -11,15 +11,18 @@ from custom_types import *
 def find_maximal_fan(g: Graph, x: NodeType, f: NodeType) -> FanType:
     fan_x = [f]
     fan_is_maximal = False
+    x_neigh = g.adj_list[x]
+    fan_x_last_node = f
     while not fan_is_maximal:
         fan_is_maximal = True
-        for v in g.adj_list[x]:
+        for v in x_neigh:
             if (
                 v not in fan_x
                 and g.edge_is_colored(x, v)
-                and g.color_is_free_at_vertex(g.get_edge_color(x, v), fan_x[-1])
+                and g.color_is_free_at_vertex(g.get_edge_color(x, v), fan_x_last_node)
             ):
                 fan_x.append(v)
+                fan_x_last_node = v
                 fan_is_maximal = False
     return fan_x
 

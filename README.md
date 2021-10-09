@@ -3,11 +3,11 @@
 An implementation of ["Misra & Gries edge coloring algorithm"](https://www.cs.utexas.edu/users/misra/psp.dir/vizing.pdf) in python ~~and networkX~~.
 
 #### How to use
-* Please use [pypy3](https://www.pypy.org/) to run the code as I've tuned it with JIT in mined. With cpython, the code runs miserably slow (up to 10 times slower).
+* Please use [pypy3](https://www.pypy.org/) to run the code as I've tuned it with JIT in mind. With cpython, the code runs miserably slow (up to 10 times slower).
 
 * **Input**: On the first line, type `|V|` and `|E|`. Then, for each line, type in the edges by the index of their end-point vertices. Vertex indices must be 0-based.
 
-* **Output**: For the first line, the max degree of the graph (`Δ`) and max number of colors used (`ᵪ′`) is printed. For each next line, the first two integer represent the end-points of an edge in the input graph and the third integer its color.
+* **Output**: For the first line, the max degree of the graph (`Δ`) and max number of colors used (`ᵪ′`) is printed. For each next line, the first two integer represent the end-points of an edge in the input graph, and the third integer indicates its color.
 
 Have a look at examples at [generated testcases](https://codeberg.org/alifara/Misra-Gries-coloring/src/branch/master/generated%20testcases) folder.
 
@@ -52,4 +52,4 @@ Benchmark #1: pypy3 main.py < 'generated testcases/input_k50.txt'
 
 ### Jupyter Notebook View
 
-* [jupyter notebook/visual_implementation.ipynb](https://nbviewer.jupyter.org/urls/codeberg.org/alifara/Misra-Gries-coloring/raw/branch/master/jupyter%20notebook/visual_implementation.ipynb) (It also contains visualizations I did in order to understand and implement the algorithm better.)
+* [jupyter notebook/visual_implementation.ipynb](https://nbviewer.jupyter.org/urls/codeberg.org/alifara/Misra-Gries-coloring/raw/branch/master/jupyter%20notebook/visual_implementation.ipynb) (It also contains visualizations I did in order to better understand and implement the algorithm.)

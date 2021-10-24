@@ -14,8 +14,8 @@ Have a look at examples at [generated testcases](https://codeberg.org/alifara/Mi
 ##### For example
 
 
-```sh
-$ pypy3 main.py
+```bash
+$ cat <<EOF >>'input.txt'  # put the input in a text file
 5 8
 0 1
 0 2
@@ -25,7 +25,8 @@ $ pypy3 main.py
 2 3
 2 4
 3 4
-
+EOF
+$ pypy3 main.py <'input.txt'  # you can also use `python3` insted of `pypy3`
 4 4
 0 1 3
 0 2 4
@@ -44,8 +45,8 @@ $ pypy3 main.py
 With a `K`<sub>`50`</sub> as input, on a Ryzen 7 laptop CPU: `392.4 ms ±  14.9 ms`
 
 ``` shell
-$ hyperfine --warmup 10 --runs 100 -i "pypy3 main.py < 'generated testcases/input_k50.txt'"
-Benchmark #1: pypy3 main.py < 'generated testcases/input_k50.txt'
+$ hyperfine --warmup 10 --runs 100 -i "pypy3 main.py <'generated testcases/input_k50.txt'"
+Benchmark #1: pypy3 main.py <'generated testcases/input_k50.txt'
   Time (mean ± σ):     392.4 ms ±  14.9 ms    [User: 363.0 ms, System: 22.3 ms]
   Range (min … max):   369.8 ms … 445.1 ms    100 runs
 ```

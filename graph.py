@@ -10,9 +10,9 @@ class Graph:
         self.adj_mat = [ColorType()] * ((n * (n + 1)) >> 1)
         self.adj_list = [[] for _ in range(n)]
 
-    def _idx(self, u: NodeType, v: NodeType) -> IndexType:
-        i = min(u, v)
-        j = max(u, v)
+    def _idx(self, i: NodeType, j: NodeType) -> IndexType:
+        if i > j:
+            i, j = j, i
         #        n__i = n - i
         #        row_offset = ((self.n * (self.n + 1)) - (n__i * (n__i + 1))) >> 1
         #        row_offset = (i * (2 * self.n - i + 1)) >> 1
@@ -31,7 +31,12 @@ class Graph:
         u_neigh = self.adj_list[u]
         u_neigh.append(v)
         v_neigh.append(u)
-        return max(len(u_neigh), len(v_neigh))
+        
+        len_u = len(u_neigh)
+        len_v = len(v_neigh)
+        if len_u > len_v:
+            return len_u
+        return len_v
 
     def get_edge_color(self, u: NodeType, v: NodeType) -> ColorType:
         return self._getColor(u, v)

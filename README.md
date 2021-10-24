@@ -3,7 +3,7 @@
 An implementation of ["Misra & Gries edge coloring algorithm"](https://www.cs.utexas.edu/users/misra/psp.dir/vizing.pdf) in python ~~and networkX~~.
 
 #### How to use
-* Please use [pypy3](https://www.pypy.org/) to run the code as I've tuned it with JIT in mind. With cpython, the code runs miserably slow (up to 10 times slower).
+* Please use [pypy3](https://www.pypy.org/) to run the code as I've tuned it with JIT in mind. With cpython, the code runs miserably slow (up to ~~10~~ 7 times slower).
 
 * **Input**: On the first line, type `|V|` and `|E|`. Then, for each line, type in the edges by the index of their end-point vertices. Vertex indices must be 0-based.
 
@@ -41,13 +41,13 @@ $ pypy3 main.py
 ![plot of the exmaple graph and its coloring](.media/exmaple.png "plot of the graph in the exmaple")
 
 ### Performance
-With a `K`<sub>`50`</sub> as input, on a Ryzen 7 laptop CPU: `425.8 ms ±  15.9 ms`
+With a `K`<sub>`50`</sub> as input, on a Ryzen 7 laptop CPU: `392.4 ms ±  14.9 ms`
 
 ``` shell
 $ hyperfine --warmup 10 --runs 100 -i "pypy3 main.py < 'generated testcases/input_k50.txt'"
 Benchmark #1: pypy3 main.py < 'generated testcases/input_k50.txt'
-  Time (mean ± σ):     425.8 ms ±  15.9 ms    [User: 396.4 ms, System: 23.3 ms]
-  Range (min … max):   402.6 ms … 467.4 ms    100 runs
+  Time (mean ± σ):     392.4 ms ±  14.9 ms    [User: 363.0 ms, System: 22.3 ms]
+  Range (min … max):   369.8 ms … 445.1 ms    100 runs
 ```
 
 ### Jupyter Notebook View

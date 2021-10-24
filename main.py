@@ -86,8 +86,10 @@ def main() -> int:
     Δ = -1
     for i in range(m):
         u, v = map(NodeType, input().split())
-        Δ = max(Δ, g.add_edge(u, v))
         edges[i] = (u, v)
+        temp_degree = g.add_edge(u, v)
+        if temp_degree > Δ:
+            Δ = temp_degree
 
     max_color = -1
     for X, f in edges:
@@ -102,14 +104,15 @@ def main() -> int:
         )  # to prevent creating new List objects when slicing them.
         rotate_fan(g, X, fan_x_view[: w_idx + 1])
         g.set_edge_color(X, w, d)
-        max_color = max(max_color, d)
+        if d > max_color:
+            max_color = d
 
     print(Δ, max_color)
     for u, v in edges:
         print(u, v, g.get_edge_color(u, v))
 
     coloring_is_optimal = max_color <= Δ + 1
-    return int(not coloring_is_optimal)  # return 0 everything went smoothly
+    return int(not coloring_is_optimal)  # return 0 if everything went smoothly
 
 
 if __name__ == "__main__":
